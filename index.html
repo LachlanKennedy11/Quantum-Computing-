@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Quantum-Cyber Collision</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js for 3D Elements -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            dark: '#05050a',
+                            blue: '#00f0ff',
+                            purple: '#bd00ff',
+                            green: '#00ff9d',
+                            panel: 'rgba(15, 15, 25, 0.7)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #05050a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        /* Fixed 3D Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .glass-panel {
+            background: rgba(15, 15, 25, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.7);
+        }
+        
+        .neon-border-blue {
+            border: 1px solid #00f0ff;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+        .neon-border-purple {
+            border: 1px solid #bd00ff;
+            box-shadow: 0 0 15px rgba(189, 0, 255, 0.2);
+        }
+        .neon-text {
+            text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+        }
+
+        /* 3D Flip Card for Classical Bit */
+        .flip-card {
+            background-color: transparent;
+            width: 120px;
+            height: 120px;
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: bold;
+            border-radius: 1rem;
+            border: 2px solid;
+        }
+        .flip-card-front {
+            background-color: #3f0000;
+            color: #ff4d4d;
+            border-color: #ff4d4d;
+        }
+        .flip-card-back {
+            background-color: #003f1a;
+            color: #00ff9d;
+            border-color: #00ff9d;
+            transform: rotateY(180deg);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #05050a; }
+        ::-webkit-scrollbar-thumb { background: #bd00ff; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f0ff; }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-300 relative">
+
+    <!-- Persistent 3D Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 font-bold text-xl text-cyber-blue tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-atom"></i> Q-CYBER
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#basics" class="hover:text-cyber-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">Basics</a>
+                        <a href="#simulation" class="hover:text-cyber-purple px-3 py-2 rounded-md text-sm font-medium transition-colors">Simulations</a>
+                        <a href="#what-if" class="hover:text-red-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">What If?</a>
+                        <a href="#alabama" class="hover:text-cyber-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">Alabama Hub</a>
+                        <a href="#artifacts" class="hover:text-cyber-purple px-3 py-2 rounded-md text-sm font-medium transition-colors">Artifacts</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cyber-dark z-0"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <div class="inline-block mb-4 px-4 py-1 rounded-full border border-cyber-purple bg-purple-900/30 text-cyber-purple text-sm font-mono">
+                System Status: Online
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
+                The <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-blue to-cyber-purple neon-text">Quantum-Cyber</span> Collision
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 mb-10 font-light">Exploring the future of Artificial Intelligence, Next-Gen Cybersecurity, and Quantum Mechanics.</p>
+            <a href="#basics" class="inline-block bg-cyber-blue/10 hover:bg-cyber-blue text-cyber-blue hover:text-cyber-dark font-bold py-3 px-8 rounded-full border border-cyber-blue transition-all duration-300 backdrop-blur-sm">
+                Initialize Sequence <i class="fa-solid fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
+
+        <!-- Section 1: Basics & Vocabulary -->
+        <section id="basics" class="pt-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 flex items-center gap-3 text-white"><i class="fa-solid fa-book-open text-cyber-blue"></i> Key Vocabulary</h2>
+                    <div class="space-y-4">
+                        <div class="glass-panel p-5 rounded-lg border-l-4 border-cyber-blue">
+                            <h3 class="text-xl font-bold text-white">Superposition</h3>
+                            <p class="text-sm mt-2 text-gray-400">A quantum principle where a particle can exist in multiple states at exactly the same time, unlike a classical bit which is only 0 or 1.</p>
+                        </div>
+                        <div class="glass-panel p-5 rounded-lg border-l-4 border-cyber-purple">
+                            <h3 class="text-xl font-bold text-white">Entanglement</h3>
+                            <p class="text-sm mt-2 text-gray-400">When multiple qubits become mathematically linked. Changing the state of one instantly changes the other, no matter the distance.</p>
+                        </div>
+                        <div class="glass-panel p-5 rounded-lg border-l-4 border-cyber-blue">
+                            <h3 class="text-xl font-bold text-white">Decoherence</h3>
+                            <p class="text-sm mt-2 text-gray-400">The fragile nature of qubits. Interference from heat, radiation, or vibration causes them to lose their quantum state and produce errors.</p>
+                        </div>
+                        <div class="glass-panel p-5 rounded-lg border-l-4 border-cyber-purple">
+                            <h3 class="text-xl font-bold text-white">Q-Day</h3>
+                            <p class="text-sm mt-2 text-gray-400">The theoretical future date when quantum computers become powerful enough to break standard global encryption.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center gap-3 text-white"><i class="fa-brands fa-youtube text-red-500"></i> Video Primer</h2>
+                    <!-- UPDATED YOUTUBE VIDEO -->
+                    <div class="aspect-w-16 aspect-h-9 w-full rounded-xl overflow-hidden neon-border-blue glass-panel relative">
+                        <div class="absolute inset-0 flex justify-center items-center -z-10 text-gray-500">Loading Video...</div>
+                        <iframe class="w-full h-[350px] relative z-10" src="https://www.youtube.com/embed/JhHMJCUmq28?rel=0" title="Quantum Computing Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl border border-gray-700 mt-6 overflow-hidden h-[250px]">
+                        <h3 class="text-lg font-bold mb-2 text-gray-300"><i class="fa-brands fa-wikipedia-w mr-2"></i>Wikipedia Reference</h3>
+                        <iframe src="https://en.wikipedia.org/wiki/Quantum_computing" class="w-full h-full bg-white opacity-90 rounded" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Simulations & Chart -->
+        <section id="simulation" class="pt-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-white">Advanced Simulations</h2>
+                <p class="text-xl text-gray-400">Visualizing the physics of computation.</p>
+            </div>
+
+            <!-- 3D Simulations Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                
+                <!-- 1. Classical Simulation -->
+                <div class="glass-panel rounded-2xl p-6 flex flex-col items-center border border-gray-700">
+                    <h3 class="text-xl font-bold mb-2 text-white">Classical Bit</h3>
+                    <p class="text-xs text-gray-400 mb-6 text-center h-8">Sequential: Flips between 0 and 1.</p>
+                    <div class="h-48 w-full flex items-center justify-center bg-black/50 rounded-xl relative overflow-hidden">
+                        <!-- CSS 3D Flip Card -->
+                        <div class="flip-card" id="classical-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front font-mono">0</div>
+                                <div class="flip-card-back font-mono">1</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Quantum Simulation -->
+                <div class="glass-panel rounded-2xl p-6 flex flex-col items-center neon-border-blue">
+                    <h3 class="text-xl font-bold mb-2 text-cyber-blue">Quantum Qubit</h3>
+                    <p class="text-xs text-gray-400 mb-6 text-center h-8">Superposition: Exploring multiple states simultaneously.</p>
+                    <div class="h-48 w-full bg-black/50 rounded-xl relative overflow-hidden cursor-move" id="quantum-container">
+                        <!-- Three.js Qubit injected here -->
+                    </div>
+                </div>
+
+                <!-- 3. Entanglement Simulation (NEW) -->
+                <div class="glass-panel rounded-2xl p-6 flex flex-col items-center neon-border-purple">
+                    <h3 class="text-xl font-bold mb-2 text-cyber-purple">Entanglement</h3>
+                    <p class="text-xs text-gray-400 mb-6 text-center h-8">Spooky Action: Particles instantly sync their states.</p>
+                    <div class="h-48 w-full bg-black/50 rounded-xl relative overflow-hidden" id="entanglement-container">
+                        <!-- Three.js Entanglement injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Required Data Table -->
+            <div class="overflow-x-auto glass-panel rounded-xl shadow-2xl border border-gray-700">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-900 text-white">
+                            <th class="p-4 border-b border-gray-700 font-bold text-gray-300">Feature</th>
+                            <th class="p-4 border-b border-gray-700 font-bold text-cyber-blue">Classical Computing</th>
+                            <th class="p-4 border-b border-gray-700 font-bold text-cyber-purple">Quantum Computing</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm md:text-base divide-y divide-gray-800 font-mono">
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="p-4 font-bold text-white">Basic Unit of Information</td>
+                            <td class="p-4 text-gray-300">Bit</td>
+                            <td class="p-4 text-gray-300">Qubit (Quantum Bit)</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors bg-gray-900/30">
+                            <td class="p-4 font-bold text-white">Data State</td>
+                            <td class="p-4 text-gray-300">Binary: Must be either a 0 or a 1.</td>
+                            <td class="p-4 text-gray-300">Superposition: Can be a 0, a 1, or a combination of both at the same time.</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="p-4 font-bold text-white">Processing Method</td>
+                            <td class="p-4 text-gray-300">Sequential: Processes operations one at a time, linearly.</td>
+                            <td class="p-4 text-gray-300">Simultaneous: Can explore multiple pathways and probabilities all at once.</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors bg-gray-900/30">
+                            <td class="p-4 font-bold text-white">Power Scaling</td>
+                            <td class="p-4 text-gray-300">Linear: Adding more transistors increases power predictably (Moore's Law).</td>
+                            <td class="p-4 text-gray-300">Exponential: Adding just one extra qubit effectively doubles the processing capacity.</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="p-4 font-bold text-white">Primary Use Cases</td>
+                            <td class="p-4 text-gray-300">General Purpose: Web browsing, everyday software, databases, streaming.</td>
+                            <td class="p-4 text-gray-300">Specialized: Cracking cryptography, simulating molecular chemistry, optimizing complex logistics.</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors bg-gray-900/30">
+                            <td class="p-4 font-bold text-white">Operating Environment</td>
+                            <td class="p-4 text-gray-300">Robust: Runs at room temperature with standard fans or liquid cooling.</td>
+                            <td class="p-4 text-gray-300">Extreme: Requires absolute isolation and temperatures near absolute zero (-459°F / -273°C).</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="p-4 font-bold text-white">Stability & Error Rates</td>
+                            <td class="p-4 text-gray-300">Highly Stable: Extremely low error rates; standard error correction is perfected.</td>
+                            <td class="p-4 text-gray-300">Highly Fragile: Prone to "decoherence." Slightest temperature change or radiation causes high error rates.</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors bg-gray-900/30">
+                            <td class="p-4 font-bold text-white">Current Stage of Maturity</td>
+                            <td class="p-4 text-gray-300">Ubiquitous: Fully mature, cheap, and sits in everyone's pocket.</td>
+                            <td class="p-4 text-gray-300">Emerging: In the "NISQ" (Noisy Intermediate-Scale Quantum) era; largely experimental and restricted to labs.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section: What If Scenario (NEW) -->
+        <section id="what-if" class="pt-16">
+            <div class="glass-panel rounded-3xl p-8 md:p-12 border-t-4 border-red-500 relative overflow-hidden bg-red-950/20">
+                <div class="absolute top-0 right-0 p-8 opacity-10 text-red-500">
+                    <i class="fa-solid fa-triangle-exclamation text-9xl"></i>
+                </div>
+                <div class="relative z-10">
+                    <div class="inline-block mb-4 px-4 py-1 rounded-full border border-red-500 bg-red-900/30 text-red-400 text-sm font-mono font-bold shadow-[0_0_10px_rgba(239,68,68,0.5)]">
+                        <i class="fa-solid fa-bolt mr-2"></i> THREAT SCENARIO
+                    </div>
+                    <h2 class="text-4xl font-extrabold mb-4 text-white">What If: <span class="text-red-500">Q-Day Happens Tomorrow?</span></h2>
+                    <p class="text-xl text-gray-300 mb-8 max-w-3xl font-light">Imagine waking up and discovering a hostile hacker group has suddenly turned on a fully stable, massive quantum computer. What happens next?</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div class="bg-black/70 p-5 rounded-lg border border-red-900/50 hover:border-red-500 transition-colors">
+                                <h4 class="text-lg font-bold text-red-400 mb-2"><i class="fa-solid fa-lock-open mr-2"></i> The Internet's Locks Break</h4>
+                                <p class="text-sm text-gray-400">Right now, everything from your online bank account to classified military communications is locked using classical math (like RSA encryption). A powerful quantum computer could solve this math in seconds, instantly unlocking almost every secure connection on Earth.</p>
+                            </div>
+                            <div class="bg-black/70 p-5 rounded-lg border border-red-900/50 hover:border-red-500 transition-colors">
+                                <h4 class="text-lg font-bold text-red-400 mb-2"><i class="fa-solid fa-database mr-2"></i> "Harvested" Data is Exposed</h4>
+                                <p class="text-sm text-gray-400">Remember "Harvest Now, Decrypt Later"? All those massive vaults of encrypted passwords, emails, and files that hackers have been stealing and hoarding for years are suddenly readable.</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div class="glass-panel p-6 rounded-xl border-l-4 border-cyber-green bg-black/80 shadow-[0_0_20px_rgba(0,255,157,0.15)]">
+                                <h4 class="text-xl font-bold text-cyber-green mb-3"><i class="fa-solid fa-shield-virus mr-2"></i> The Countermeasure: PQC</h4>
+                                <p class="text-gray-300 text-sm mb-4">This nightmare scenario is why the cybersecurity world isn't waiting. Cryptographers have already developed <strong>Post-Quantum Cryptography (PQC)</strong>.</p>
+                                <p class="text-gray-400 text-sm">PQC uses entirely new types of mathematics—like complex, multidimensional lattice grids—that even quantum computers get completely lost trying to solve. The global race right now is to upgrade our current systems to PQC <em>before</em> Q-Day actually arrives.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Alabama Ecosystem & Careers -->
+        <section id="alabama" class="pt-16">
+            <div class="glass-panel rounded-3xl p-8 md:p-12 border-t-4 border-cyber-blue relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-5">
+                    <i class="fa-solid fa-satellite-dish text-9xl"></i>
+                </div>
+                <div class="relative z-10">
+                    <h2 class="text-4xl font-extrabold mb-4 text-white">The Ground Zero: <span class="text-cyber-blue">Huntsville & Redstone</span></h2>
+                    <p class="text-xl text-gray-300 mb-10 max-w-3xl font-light">You don't have to look to Silicon Valley to see this collision in action. The epicenter of the AI, Cyber, and Quantum defense network is right here in North Alabama.</p>
+                    
+                    <!-- The Ecosystem Grid -->
+                    <h3 class="text-2xl font-bold mb-4 text-gray-200 border-b border-gray-700 pb-2">The Ecosystem</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                        <!-- UAH -->
+                        <div class="bg-black/60 p-6 rounded-xl border border-gray-700 hover:border-cyber-blue transition-all hover:-translate-y-1">
+                            <div class="w-12 h-12 bg-blue-900/50 rounded-lg flex items-center justify-center mb-4 text-cyber-blue text-2xl">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-2">The Talent Engine (UAH)</h4>
+                            <p class="text-sm text-gray-400">The University of Alabama in Huntsville builds the future workforce. With major expansions like the Bevill Center for Cybersecurity Research, UAH is where the algorithms of tomorrow are born.</p>
+                        </div>
+                        
+                        <!-- Redstone -->
+                        <div class="bg-black/60 p-6 rounded-xl border border-gray-700 hover:border-red-500 transition-all hover:-translate-y-1">
+                            <div class="w-12 h-12 bg-red-900/50 rounded-lg flex items-center justify-center mb-4 text-red-500 text-2xl">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-2">Operational Core</h4>
+                            <p class="text-sm text-gray-400">Redstone Arsenal is a digital fortress. The <strong class="text-white">FBI Cyber Hub</strong> analyzes ransomware here, while the Missile Defense Agency uses AI to counter hypersonic threats.</p>
+                        </div>
+
+                        <!-- Davidson -->
+                        <div class="bg-black/60 p-6 rounded-xl border border-gray-700 hover:border-cyber-purple transition-all hover:-translate-y-1">
+                            <div class="w-12 h-12 bg-purple-900/50 rounded-lg flex items-center justify-center mb-4 text-cyber-purple text-2xl">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-2">Quantum Reality</h4>
+                            <p class="text-sm text-gray-400">In Cummings Research Park, <strong class="text-white">Davidson Technologies</strong> hosts Alabama’s first on-premises D-Wave quantum computer, giving local contractors direct access to this tech.</p>
+                        </div>
+                    </div>
+
+                    <!-- NEW: Local Careers -->
+                    <h3 class="text-2xl font-bold mb-4 text-cyber-green border-b border-gray-700 pb-2"><i class="fa-solid fa-user-tie mr-2"></i> Future Careers in Our Area</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-gray-900/80 p-4 rounded-lg border border-gray-700 border-l-4 border-l-cyber-purple">
+                            <h5 class="font-bold text-white">Quantum Algorithm Researcher</h5>
+                            <p class="text-xs text-gray-400 mt-1">Writes math for quantum computers to optimize defense logistics. (Employers: Davidson, UAH Labs)</p>
+                        </div>
+                        <div class="bg-gray-900/80 p-4 rounded-lg border border-gray-700 border-l-4 border-l-red-500">
+                            <h5 class="font-bold text-white">Cyber Intelligence Analyst</h5>
+                            <p class="text-xs text-gray-400 mt-1">Uses AI to track state-sponsored hackers and prevent data theft. (Employers: FBI Redstone)</p>
+                        </div>
+                        <div class="bg-gray-900/80 p-4 rounded-lg border border-gray-700 border-l-4 border-l-cyber-blue">
+                            <h5 class="font-bold text-white">AI Systems Architect</h5>
+                            <p class="text-xs text-gray-400 mt-1">Designs AI that makes split-second decisions for defensive missiles. (Employers: MDA, Boeing, Lockheed)</p>
+                        </div>
+                        <div class="bg-gray-900/80 p-4 rounded-lg border border-gray-700 border-l-4 border-l-cyber-green">
+                            <h5 class="font-bold text-white">Post-Quantum Cryptographer</h5>
+                            <p class="text-xs text-gray-400 mt-1">Upgrades old encryption to new math that quantum computers can't crack. (Employers: DoD Contractors)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Artifacts (Iframes & Links) -->
+        <section id="artifacts" class="pt-16">
+            <h2 class="text-3xl font-bold mb-8 flex items-center gap-3 text-white"><i class="fa-solid fa-folder-open text-cyber-purple"></i> Project Artifacts</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Notebook LM Iframe -->
+                <div class="glass-panel p-6 rounded-2xl neon-border-blue flex flex-col">
+                    <h3 class="text-xl font-bold mb-4 flex justify-between items-center text-white">
+                        <span><i class="fa-solid fa-book text-cyber-blue mr-2"></i> NotebookLM Interactive Space</span>
+                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">Live Embedding</span>
+                    </h3>
+                    <p class="text-sm text-gray-400 mb-4">Explore the synthesized notes, AI chat, and connected sources for this project below.</p>
+                    
+                    <div class="relative w-full h-96 bg-gray-950 rounded-xl border border-gray-700 overflow-hidden group">
+                        <iframe id="notebook-iframe" src="about:blank" class="w-full h-full border-0 absolute z-0"></iframe>
+                        
+                        <!-- Overlay instructions for you -->
+                        <div class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 p-6 text-center border-2 border-dashed border-cyber-blue rounded-xl pointer-events-none">
+                            <i class="fa-solid fa-code text-4xl text-gray-500 mb-4"></i>
+                            <h4 class="text-white font-bold text-lg mb-2">Insert NotebookLM URL Here</h4>
+                            <p class="text-sm text-gray-400">Edit the HTML and replace <code class="bg-gray-800 px-1 rounded text-cyber-blue">src="about:blank"</code> in the iframe tag with your public Google Notebook link.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Podcast & Resources -->
+                <div class="flex flex-col gap-6">
+                    <!-- Podcast Embed -->
+                    <div class="glass-panel p-6 rounded-2xl border border-gray-700">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white"><i class="fa-solid fa-podcast text-cyber-green"></i> Project Podcast</h3>
+                        
+                        <div class="w-full h-40 bg-gray-950 rounded-xl border border-gray-700 flex flex-col items-center justify-center text-center p-4 relative">
+                            <iframe id="podcast-iframe" src="about:blank" class="w-full h-full absolute top-0 left-0 opacity-0 z-0" frameborder="0"></iframe>
+                            <div class="z-10 text-gray-500">
+                                <i class="fa-brands fa-spotify text-3xl mb-2 text-cyber-green"></i>
+                                <p class="text-sm font-bold text-white">Embed Podcast Here</p>
+                                <p class="text-xs">Replace iframe src with your audio embed URL.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Working Links -->
+                    <div class="glass-panel p-6 rounded-2xl border border-gray-700 flex-grow">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white"><i class="fa-solid fa-link text-cyber-purple"></i> Deep Dive Resources</h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <a href="https://quantum-computing.ibm.com/" target="_blank" class="block group">
+                                    <div class="flex items-start gap-3">
+                                        <div class="mt-1 text-cyber-blue group-hover:text-white transition-colors"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></div>
+                                        <div>
+                                            <h4 class="font-bold text-white group-hover:text-cyber-blue transition-colors">IBM Quantum Computing</h4>
+                                            <p class="text-xs text-gray-400">Interact with real quantum computers via the cloud.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.nist.gov/pqcrypto" target="_blank" class="block group">
+                                    <div class="flex items-start gap-3">
+                                        <div class="mt-1 text-cyber-blue group-hover:text-white transition-colors"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></div>
+                                        <div>
+                                            <h4 class="font-bold text-white group-hover:text-cyber-blue transition-colors">NIST Post-Quantum Cryptography</h4>
+                                            <p class="text-xs text-gray-400">US government standards for defending against Q-Day.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.uah.edu/ccreat" target="_blank" class="block group">
+                                    <div class="flex items-start gap-3">
+                                        <div class="mt-1 text-cyber-purple group-hover:text-white transition-colors"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></div>
+                                        <div>
+                                            <h4 class="font-bold text-white group-hover:text-cyber-purple transition-colors">UAH Bevill Center (CCREAT)</h4>
+                                            <p class="text-xs text-gray-400">Huntsville's premier cybersecurity research center.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://davidson-tech.com/" target="_blank" class="block group">
+                                    <div class="flex items-start gap-3">
+                                        <div class="mt-1 text-cyber-purple group-hover:text-white transition-colors"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></div>
+                                        <div>
+                                            <h4 class="font-bold text-white group-hover:text-cyber-purple transition-colors">Davidson Technologies</h4>
+                                            <p class="text-xs text-gray-400">Company hosting Alabama's commercial D-Wave system.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Discussion -->
+        <section class="pt-8 pb-24">
+            <div class="bg-gradient-to-r from-gray-900 to-black p-8 rounded-3xl border border-gray-700 shadow-2xl">
+                <h2 class="text-3xl font-bold mb-6 text-white"><i class="fa-solid fa-comments text-cyber-blue mr-3"></i> Class Discussion</h2>
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="text-2xl text-cyber-purple font-black drop-shadow-[0_0_8px_rgba(189,0,255,0.8)]">Q1</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-200">The "Harvest Now, Decrypt Later" Threat</h4>
+                            <p class="text-gray-400 text-sm">If hackers are stealing encrypted data today that they cannot read, how should organizations prioritize their defense? Do you secure current perimeters, or rush to upgrade to Post-Quantum Cryptography?</p>
+                        </div>
+                    </div>
+                    <hr class="border-gray-800">
+                    <div class="flex gap-4">
+                        <div class="text-2xl text-cyber-blue font-black drop-shadow-[0_0_8px_rgba(0,240,255,0.8)]">Q2</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-200">The Alabama Advantage</h4>
+                            <p class="text-gray-400 text-sm">How does the close physical proximity of UAH (Academia), Redstone Arsenal (Government), and Davidson (Private Industry) accelerate the development of AI and Quantum technologies compared to scattered remote teams?</p>
+                        </div>
+                    </div>
+                    <hr class="border-gray-800">
+                    <div class="flex gap-4">
+                        <div class="text-2xl text-cyber-green font-black drop-shadow-[0_0_8px_rgba(0,255,157,0.8)]">Q3</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-200">AI vs AI Warfare</h4>
+                            <p class="text-gray-400 text-sm">As cybersecurity becomes a battle of automated algorithms, what happens to the human element? Does the role of a cybersecurity analyst disappear, or does it evolve?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-gray-800 bg-black text-center py-8">
+        <p class="text-gray-500 text-sm">Built for 12th Grade AI Class Presentation &bull; Designed by [Your Name Here]</p>
+    </footer>
+
+    <!-- Interactive Scripts for 3D Elements -->
+    <script>
+        // ==========================================
+        // GLOBAL 3D BACKGROUND PARTICLES
+        // ==========================================
+        const bgCanvas = document.getElementById('bg-canvas');
+        const bgScene = new THREE.Scene();
+        const bgCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const bgRenderer = new THREE.WebGLRenderer({ canvas: bgCanvas, alpha: true, antialias: true });
+        
+        bgRenderer.setSize(window.innerWidth, window.innerHeight);
+        bgRenderer.setPixelRatio(window.devicePixelRatio);
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 2000; // Increased for global background
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            // Spread widely across x, y, and z
+            posArray[i] = (Math.random() - 0.5) * 30; 
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.03,
+            color: 0x00f0ff,
+            transparent: true,
+            opacity: 0.5,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        bgScene.add(particlesMesh);
+        bgCamera.position.z = 8;
+
+        let mouseX = 0; let mouseY = 0;
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) - 0.5;
+            mouseY = (event.clientY / window.innerHeight) - 0.5;
+        });
+
+        function animateBg() {
+            requestAnimationFrame(animateBg);
+            particlesMesh.rotation.y += 0.001;
+            particlesMesh.rotation.x += 0.0005;
+            // Parallax effect
+            bgCamera.position.x += (mouseX * 2 - bgCamera.position.x) * 0.05;
+            bgCamera.position.y += (-mouseY * 2 - bgCamera.position.y) * 0.05;
+            bgCamera.lookAt(bgScene.position);
+            bgRenderer.render(bgScene, bgCamera);
+        }
+        animateBg();
+
+        window.addEventListener('resize', () => {
+            bgCamera.aspect = window.innerWidth / window.innerHeight;
+            bgCamera.updateProjectionMatrix();
+            bgRenderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ==========================================
+        // SIMULATION 1: CLASSICAL CSS FLIP CARD
+        // ==========================================
+        const flipCard = document.getElementById('classical-card');
+        setInterval(() => {
+            flipCard.classList.toggle('flipped');
+        }, 1500); // Flips every 1.5 seconds
+
+        // ==========================================
+        // SIMULATION 2: QUANTUM QUBIT (BLOCH SPHERE)
+        // ==========================================
+        const qContainer = document.getElementById('quantum-container');
+        const qScene = new THREE.Scene();
+        const qCamera = new THREE.PerspectiveCamera(50, qContainer.clientWidth / qContainer.clientHeight, 0.1, 1000);
+        const qRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        qRenderer.setSize(qContainer.clientWidth, qContainer.clientHeight);
+        qContainer.appendChild(qRenderer.domElement);
+
+        // Core Sphere
+        const qGeometry = new THREE.SphereGeometry(2, 24, 24);
+        const qMaterial = new THREE.MeshBasicMaterial({ color: 0x00f0ff, wireframe: true, transparent: true, opacity: 0.2 });
+        const qSphere = new THREE.Mesh(qGeometry, qMaterial);
+        qScene.add(qSphere);
+
+        // Glowing Arrow (State Vector)
+        const qDir = new THREE.Vector3(1, 1, 1).normalize();
+        const qArrow = new THREE.ArrowHelper(qDir, new THREE.Vector3(0,0,0), 2.2, 0x00f0ff, 0.6, 0.4);
+        qScene.add(qArrow);
+
+        qCamera.position.z = 6;
+        qCamera.position.y = 1.5;
+        qCamera.lookAt(0,0,0);
+
+        let qTime = 0;
+        function animateQubit() {
+            requestAnimationFrame(animateQubit);
+            qSphere.rotation.y += 0.005;
+            qSphere.rotation.x += 0.002;
+            
+            qTime += 0.03;
+            // Arrow moves wildly to represent superposition
+            const newDir = new THREE.Vector3(Math.sin(qTime * 1.2), Math.cos(qTime * 0.8), Math.sin(qTime * 0.5)).normalize();
+            qArrow.setDirection(newDir);
+            
+            qRenderer.render(qScene, qCamera);
+        }
+        animateQubit();
+
+        // ==========================================
+        // SIMULATION 3: ENTANGLEMENT (NEW)
+        // ==========================================
+        const eContainer = document.getElementById('entanglement-container');
+        const eScene = new THREE.Scene();
+        const eCamera = new THREE.PerspectiveCamera(50, eContainer.clientWidth / eContainer.clientHeight, 0.1, 1000);
+        const eRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        eRenderer.setSize(eContainer.clientWidth, eContainer.clientHeight);
+        eContainer.appendChild(eRenderer.domElement);
+
+        // Particle 1 (Left)
+        const eGeometry = new THREE.SphereGeometry(1.2, 16, 16);
+        const eMat1 = new THREE.MeshBasicMaterial({ color: 0xbd00ff, wireframe: true });
+        const sphere1 = new THREE.Mesh(eGeometry, eMat1);
+        sphere1.position.x = -1.8;
+        eScene.add(sphere1);
+
+        // Particle 2 (Right)
+        const eMat2 = new THREE.MeshBasicMaterial({ color: 0xbd00ff, wireframe: true });
+        const sphere2 = new THREE.Mesh(eGeometry, eMat2);
+        sphere2.position.x = 1.8;
+        eScene.add(sphere2);
+
+        // Connecting Line
+        const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.3 });
+        const lineGeo = new THREE.BufferGeometry().setFromPoints([sphere1.position, sphere2.position]);
+        const line = new THREE.Line(lineGeo, lineMat);
+        eScene.add(line);
+
+        eCamera.position.z = 6;
+
+        let eTime = 0;
+        function animateEntanglement() {
+            requestAnimationFrame(animateEntanglement);
+            eTime += 0.02;
+            
+            // They rotate EXACTLY the same way (entangled)
+            const rotX = Math.sin(eTime) * 2;
+            const rotY = Math.cos(eTime) * 2;
+            
+            sphere1.rotation.set(rotX, rotY, 0);
+            sphere2.rotation.set(rotX, rotY, 0);
+
+            // Pulsing color sync
+            const pulse = (Math.sin(eTime * 3) + 1) / 2; // 0 to 1
+            const r = 189/255; const g = 0; const b = 255/255; // base purple
+            const r2 = 0; const g2 = 240/255; const b2 = 255/255; // flash blue
+            
+            const currentR = r + (r2 - r) * pulse;
+            const currentG = g + (g2 - g) * pulse;
+            const currentB = b + (b2 - b) * pulse;
+            
+            sphere1.material.color.setRGB(currentR, currentG, currentB);
+            sphere2.material.color.setRGB(currentR, currentG, currentB);
+
+            eRenderer.render(eScene, eCamera);
+        }
+        animateEntanglement();
+
+        // Fix resizing for simulation canvases
+        window.addEventListener('resize', () => {
+            if(qContainer.clientWidth > 0) {
+                qRenderer.setSize(qContainer.clientWidth, qContainer.clientHeight);
+                qCamera.aspect = qContainer.clientWidth / qContainer.clientHeight;
+                qCamera.updateProjectionMatrix();
+                
+                eRenderer.setSize(eContainer.clientWidth, eContainer.clientHeight);
+                eCamera.aspect = eContainer.clientWidth / eContainer.clientHeight;
+                eCamera.updateProjectionMatrix();
+            }
+        });
+
+    </script>
+</body>
+</html>
