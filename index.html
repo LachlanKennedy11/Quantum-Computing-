@@ -139,6 +139,7 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <a href="#basics" class="hover:text-cyber-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">Basics</a>
+                        <a href="#timeline" class="hover:text-cyber-green px-3 py-2 rounded-md text-sm font-medium transition-colors">Timeline</a>
                         <a href="#simulation" class="hover:text-cyber-purple px-3 py-2 rounded-md text-sm font-medium transition-colors">Simulations</a>
                         <a href="#what-if" class="hover:text-red-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">What If?</a>
                         <a href="#alabama" class="hover:text-cyber-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">Alabama Hub</a>
@@ -153,13 +154,15 @@
     <header class="relative h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cyber-dark z-0"></div>
         <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
-            <div class="inline-block mb-4 px-4 py-1 rounded-full border border-cyber-purple bg-purple-900/30 text-cyber-purple text-sm font-mono">
-                System Status: Online
+            <div class="inline-block mb-4 px-4 py-1 rounded-full border border-cyber-purple bg-purple-900/30 text-cyber-purple text-sm font-mono shadow-[0_0_10px_rgba(189,0,255,0.5)]">
+                <i class="fa-solid fa-terminal mr-2"></i> System Status: Online
             </div>
             <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
                 The <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-blue to-cyber-purple neon-text">Quantum-Cyber</span> Collision
             </h1>
-            <p class="text-xl md:text-2xl text-gray-400 mb-10 font-light">Exploring the future of Artificial Intelligence, Next-Gen Cybersecurity, and Quantum Mechanics.</p>
+            <!-- UPDATED: Typewriter effect container -->
+            <p id="typewriter-text" class="text-xl md:text-2xl text-cyber-green mb-10 font-mono min-h-[4rem] border-r-2 border-cyber-green pr-1 animate-pulse"></p>
+            
             <a href="#basics" class="inline-block bg-cyber-blue/10 hover:bg-cyber-blue text-cyber-blue hover:text-cyber-dark font-bold py-3 px-8 rounded-full border border-cyber-blue transition-all duration-300 backdrop-blur-sm">
                 Initialize Sequence <i class="fa-solid fa-arrow-down ml-2"></i>
             </a>
@@ -203,6 +206,76 @@
                     <div class="glass-panel p-4 rounded-xl border border-gray-700 mt-6 overflow-hidden h-[250px]">
                         <h3 class="text-lg font-bold mb-2 text-gray-300"><i class="fa-brands fa-wikipedia-w mr-2"></i>Wikipedia Reference</h3>
                         <iframe src="https://en.wikipedia.org/wiki/Quantum_computing" class="w-full h-full bg-white opacity-90 rounded" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Computing Timeline (NEW) -->
+        <section id="timeline" class="pt-16">
+            <div class="glass-panel rounded-3xl p-8 md:p-12 border-t-4 border-cyber-green relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-5">
+                    <i class="fa-solid fa-clock-rotate-left text-9xl"></i>
+                </div>
+                <div class="relative z-10">
+                    <h2 class="text-4xl font-extrabold mb-8 text-white"><i class="fa-solid fa-timeline text-cyber-green mr-3"></i> The Evolution <span class="text-cyber-green">Timeline</span></h2>
+                    
+                    <div class="relative border-l-2 border-gray-700 ml-3 md:ml-6 space-y-10 py-4">
+                        
+                        <!-- Classical Node 1 -->
+                        <div class="relative pl-8 transition-transform hover:translate-x-2 duration-300">
+                            <div class="absolute w-5 h-5 bg-cyber-blue rounded-full -left-[11px] top-1 shadow-[0_0_12px_#00f0ff] border-2 border-cyber-dark"></div>
+                            <div class="text-cyber-blue font-bold text-xl mb-1">1945: The ENIAC (Classical)</div>
+                            <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800 mt-2">
+                                <p class="text-gray-300 text-sm">The first programmable, general-purpose digital computer is built. It weighs 30 tons, takes up an entire room, and operates using massive, hot vacuum tubes.</p>
+                            </div>
+                        </div>
+
+                        <!-- Quantum Node 1 -->
+                        <div class="relative pl-8 transition-transform hover:translate-x-2 duration-300">
+                            <div class="absolute w-5 h-5 bg-cyber-purple rounded-full -left-[11px] top-1 shadow-[0_0_12px_#bd00ff] border-2 border-cyber-dark"></div>
+                            <div class="text-cyber-purple font-bold text-xl mb-1">1981: The Quantum Concept</div>
+                            <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800 mt-2">
+                                <p class="text-gray-300 text-sm">Famous physicist Richard Feynman proposes that the only way to accurately simulate quantum physics is to build a computer that actually runs on quantum rules.</p>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Peter Shor Node -->
+                        <div class="relative pl-8 transition-transform hover:translate-x-2 duration-300">
+                            <div class="absolute w-5 h-5 bg-red-500 rounded-full -left-[11px] top-1 shadow-[0_0_12px_#ef4444] border-2 border-cyber-dark"></div>
+                            <div class="text-red-400 font-bold text-xl mb-1">1994: The Q-Day Threat is Born</div>
+                            <div class="bg-gray-900/60 p-4 rounded-xl border border-red-900/50 mt-2">
+                                <p class="text-gray-300 text-sm">Mathematician <strong class="text-white">Peter Shor</strong> invents "Shor's Algorithm." He mathematically proves that if a quantum computer is ever built, it will be able to easily shatter the RSA encryption that protects the entire internet.</p>
+                            </div>
+                        </div>
+
+                        <!-- Classical Node 2 -->
+                        <div class="relative pl-8 transition-transform hover:translate-x-2 duration-300">
+                            <div class="absolute w-5 h-5 bg-cyber-blue rounded-full -left-[11px] top-1 shadow-[0_0_12px_#00f0ff] border-2 border-cyber-dark"></div>
+                            <div class="text-cyber-blue font-bold text-xl mb-1">2000s: The Smartphone Era</div>
+                            <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800 mt-2">
+                                <p class="text-gray-300 text-sm">Classical computer chips become incredibly small and efficient. Billions of microscopic transistors are packed into devices that fit in your pocket.</p>
+                            </div>
+                        </div>
+
+                        <!-- Quantum Node 2 -->
+                        <div class="relative pl-8 transition-transform hover:translate-x-2 duration-300">
+                            <div class="absolute w-5 h-5 bg-cyber-purple rounded-full -left-[11px] top-1 shadow-[0_0_12px_#bd00ff] border-2 border-cyber-dark"></div>
+                            <div class="text-cyber-purple font-bold text-xl mb-1">2019: "Quantum Supremacy"</div>
+                            <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800 mt-2">
+                                <p class="text-gray-300 text-sm">Google announces its Sycamore quantum processor solved a complex mathematical calculation in 200 seconds—a task that would take a classical supercomputer 10,000 years.</p>
+                            </div>
+                        </div>
+
+                        <!-- Current Node -->
+                        <div class="relative pl-8 transition-transform hover:translate-x-2 duration-300">
+                            <div class="absolute w-5 h-5 bg-cyber-green rounded-full -left-[11px] top-1 shadow-[0_0_12px_#00ff9d] border-2 border-cyber-dark"></div>
+                            <div class="text-cyber-green font-bold text-xl mb-1">Today: The AI & NISQ Era</div>
+                            <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800 mt-2 border-l-4 border-l-cyber-green">
+                                <p class="text-gray-300 text-sm">We are currently in the "Noisy Intermediate-Scale Quantum" era. Scientists are racing to fix fragile qubit errors, while simultaneously fighting an automated, AI-driven cyber war.</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -306,6 +379,39 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Python Code Snippet Section (NEW) -->
+            <div class="mt-16 glass-panel rounded-2xl overflow-hidden border border-gray-700 shadow-2xl">
+                <!-- Mac-style IDE Header -->
+                <div class="bg-[#0d1117] px-4 py-3 border-b border-gray-800 flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="ml-2 text-xs font-mono text-gray-500">superposition.py - IBM Qiskit</span>
+                </div>
+                
+                <div class="p-6 md:p-8 flex flex-col lg:flex-row gap-8 items-center bg-gray-900/50">
+                    <div class="w-full lg:w-1/2">
+                        <h3 class="text-2xl font-bold text-white mb-3 flex items-center"><i class="fa-brands fa-python text-yellow-400 mr-3 text-3xl"></i> The Code Behind the Magic</h3>
+                        <p class="text-gray-300 text-sm mb-4 leading-relaxed">Quantum computing isn't just theoretical physics—it is real code that you can write today. Using libraries like IBM's open-source <strong>Qiskit</strong>, Python developers can send mathematical instructions directly to real quantum processors sitting in cloud servers.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">This simple 5-line script creates a quantum circuit and applies a <strong>Hadamard Gate</strong> (the <code class="bg-gray-800 text-cyber-blue px-1 rounded">.h()</code> command). This single line of code is what forces the qubit into a state of superposition—making it exist as both 0 and 1 at the exact same time!</p>
+                    </div>
+                    
+                    <div class="w-full lg:w-1/2 bg-[#0d1117] p-6 rounded-xl border border-gray-700 font-mono text-sm md:text-base shadow-inner w-full overflow-x-auto">
+                        <div class="text-blue-400 mb-3"><span class="text-purple-400">from</span> qiskit <span class="text-purple-400">import</span> <span class="text-yellow-200">QuantumCircuit</span></div>
+                        
+                        <div class="text-gray-500 italic mb-1"># 1. Create a quantum circuit with 1 qubit</div>
+                        <div class="text-white mb-3">qc = <span class="text-yellow-200">QuantumCircuit</span>(<span class="text-orange-400">1</span>)</div>
+                        
+                        <div class="text-gray-500 italic mb-1"># 2. Apply a Hadamard Gate to put it into Superposition</div>
+                        <div class="text-white mb-3">qc.h(<span class="text-orange-400">0</span>)</div>
+                        
+                        <div class="text-gray-500 italic mb-1"># 3. Measure the final result</div>
+                        <div class="text-white">qc.measure_all()</div>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <!-- Section: What If Scenario (NEW) -->
@@ -422,31 +528,35 @@
                     </h3>
                     <p class="text-sm text-gray-400 mb-4">Explore the synthesized notes, AI chat, and connected sources for this project below.</p>
                     
-                    <div class="relative w-full h-96 bg-gray-950 rounded-xl border border-gray-700 overflow-hidden group">
-                        <iframe id="notebook-iframe" src="about:blank" class="w-full h-full border-0 absolute z-0"></iframe>
-                        
-                        <!-- Overlay instructions for you -->
-                        <div class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/80 p-6 text-center border-2 border-dashed border-cyber-blue rounded-xl pointer-events-none">
-                            <i class="fa-solid fa-code text-4xl text-gray-500 mb-4"></i>
-                            <h4 class="text-white font-bold text-lg mb-2">Insert NotebookLM URL Here</h4>
-                            <p class="text-sm text-gray-400">Edit the HTML and replace <code class="bg-gray-800 px-1 rounded text-cyber-blue">src="about:blank"</code> in the iframe tag with your public Google Notebook link.</p>
-                        </div>
+                    <div class="relative w-full h-[400px] bg-white rounded-xl border border-gray-700 overflow-hidden group mb-4">
+                        <!-- Injected User's NotebookLM Link -->
+                        <iframe id="notebook-iframe" src="https://notebooklm.google.com/notebook/895e0d24-7f10-4fbe-9b93-cfa1bcb727dd?artifactId=5c0e94d7-2b20-4f86-bf3d-6469fdef6454" class="w-full h-full border-0 absolute z-0" allow="clipboard-write"></iframe>
+                    </div>
+
+                    <!-- Fallback button in case school networks block iframes -->
+                    <div class="text-center mt-auto">
+                        <a href="https://notebooklm.google.com/notebook/895e0d24-7f10-4fbe-9b93-cfa1bcb727dd?artifactId=5c0e94d7-2b20-4f86-bf3d-6469fdef6454" target="_blank" class="inline-block bg-cyber-blue/20 hover:bg-cyber-blue text-cyber-blue hover:text-cyber-dark font-bold py-2 px-6 rounded-full border border-cyber-blue transition-all duration-300 text-sm">
+                            <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Open Notebook in Full Screen
+                        </a>
                     </div>
                 </div>
 
                 <!-- Podcast & Resources -->
                 <div class="flex flex-col gap-6">
                     <!-- Podcast Embed -->
-                    <div class="glass-panel p-6 rounded-2xl border border-gray-700">
-                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white"><i class="fa-solid fa-podcast text-cyber-green"></i> Project Podcast</h3>
+                    <div class="glass-panel p-6 rounded-2xl border border-cyber-green shadow-[0_0_15px_rgba(0,255,157,0.1)]">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">
+                            <i class="fa-solid fa-headphones text-cyber-green"></i> Project Deep Dive Podcast
+                        </h3>
                         
-                        <div class="w-full h-40 bg-gray-950 rounded-xl border border-gray-700 flex flex-col items-center justify-center text-center p-4 relative">
-                            <iframe id="podcast-iframe" src="about:blank" class="w-full h-full absolute top-0 left-0 opacity-0 z-0" frameborder="0"></iframe>
-                            <div class="z-10 text-gray-500">
-                                <i class="fa-brands fa-spotify text-3xl mb-2 text-cyber-green"></i>
-                                <p class="text-sm font-bold text-white">Embed Podcast Here</p>
-                                <p class="text-xs">Replace iframe src with your audio embed URL.</p>
-                            </div>
+                        <div class="w-full bg-black/60 rounded-xl border border-gray-700 flex flex-col p-5">
+                            <p class="text-sm text-gray-300 mb-4">Listen to this AI-generated synthesis explaining Superposition, the threat of "Harvest Now, Decrypt Later," and why Huntsville is the epicenter of it all.</p>
+                            
+                            <!-- Custom Audio Player linking to your uploaded file -->
+                            <audio controls class="w-full rounded-md shadow-lg outline-none">
+                                <source src="Why_Hackers_Are_Harvesting_Encrypted_Data.m4a" type="audio/mp4">
+                                Your browser does not support the audio element.
+                            </audio>
                         </div>
                     </div>
 
@@ -708,6 +818,27 @@
             eRenderer.render(eScene, eCamera);
         }
         animateEntanglement();
+
+        // ==========================================
+        // TYPEWRITER EFFECT (HERO TEXT)
+        // ==========================================
+        const textToType = "Exploring the future of Artificial Intelligence, Next-Gen Cybersecurity, and Quantum Mechanics.";
+        const typeTarget = document.getElementById("typewriter-text");
+        let typeIndex = 0;
+
+        function typeWriter() {
+            if (typeIndex < textToType.length) {
+                typeTarget.innerHTML += textToType.charAt(typeIndex);
+                typeIndex++;
+                setTimeout(typeWriter, 40); // typing speed
+            } else {
+                // Keep the cursor blinking after typing finishes
+                typeTarget.classList.add("border-r-2", "border-cyber-green", "animate-pulse");
+            }
+        }
+        
+        // Start typing after a short delay
+        setTimeout(typeWriter, 1000);
 
         // Fix resizing for simulation canvases
         window.addEventListener('resize', () => {
