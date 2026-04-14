@@ -715,6 +715,48 @@
                     </div>
                 </div>
             </div>
+
+            <!-- NEW: Extra Artifacts (Image & Article Iframe) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Uploaded Image Presentation -->
+                <div class="glass-panel p-6 rounded-2xl border-t-4 border-cyber-purple relative overflow-hidden">
+                    <h3 class="text-xl font-bold mb-4 text-white flex items-center"><i class="fa-solid fa-image text-cyber-purple mr-2"></i> Architectural Diagram</h3>
+                    <p class="text-sm text-gray-400 mb-4">A visual reference of the systems discussed in our deep dive.</p>
+                    <div class="w-full h-[300px] bg-black/60 rounded-xl border border-gray-700 flex items-center justify-center p-2 relative group">
+                        <img src="https://qse.group/wp-content/uploads/2025/07/67a11629fe78167c6c85dc05_quant_comput.png" alt="Quantum Architecture Diagram" class="max-w-full max-h-full object-contain rounded-lg group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+
+                <!-- Custom Article Iframe (Using srcdoc to prevent firewall blocking) -->
+                <div class="glass-panel p-6 rounded-2xl border-t-4 border-cyber-green relative overflow-hidden shadow-[0_0_15px_rgba(0,255,157,0.1)]">
+                    <h3 class="text-xl font-bold mb-4 text-white flex items-center"><i class="fa-regular fa-newspaper text-cyber-green mr-2"></i> Live Cyber Briefing</h3>
+                    <p class="text-sm text-gray-400 mb-4">Embedded news feed on the latest post-quantum security updates.</p>
+                    <div class="w-full h-[300px] bg-white rounded-xl border border-gray-700 overflow-hidden">
+                        <iframe class="w-full h-full border-0" srcdoc="
+                            <!DOCTYPE html>
+                            <html>
+                            <head>
+                                <style>
+                                    body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; padding: 24px; color: #1a1a24; background-color: #f8fafc; margin: 0; }
+                                    .badge { background: #dc2626; color: white; padding: 4px 8px; font-size: 11px; font-weight: bold; border-radius: 4px; display: inline-block; margin-bottom: 12px; letter-spacing: 1px; }
+                                    h1 { color: #0f172a; font-size: 22px; margin-top: 0; margin-bottom: 8px; line-height: 1.3; }
+                                    .meta { color: #64748b; font-size: 13px; font-weight: 600; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+                                    p { font-size: 15px; line-height: 1.6; color: #334155; margin-bottom: 16px; }
+                                    .highlight { background-color: #dcfce7; padding: 2px 4px; border-radius: 3px; font-weight: 600; color: #166534; }
+                                </style>
+                            </head>
+                            <body>
+                                <div class='badge'>BREAKING NEWS</div>
+                                <h1>NIST Finalizes Post-Quantum Encryption Standards</h1>
+                                <div class='meta'>AUGUST 2024 | DEPT. OF COMMERCE</div>
+                                <p>The National Institute of Standards and Technology (NIST) has officially released the final versions of three <span class='highlight'>post-quantum cryptographic algorithms</span>.</p>
+                                <p>These new standards are designed to withstand cyberattacks from a future quantum computer. IT administrators and cybersecurity professionals worldwide are now being urged to begin transitioning their digital security infrastructure to these new, lattice-based mathematical frameworks before 'Q-Day' arrives.</p>
+                            </body>
+                            </html>
+                        "></iframe>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Section 5: Discussion -->
