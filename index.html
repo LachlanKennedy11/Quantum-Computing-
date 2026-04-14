@@ -141,6 +141,7 @@
                         <a href="#basics" class="hover:text-cyber-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">Basics</a>
                         <a href="#timeline" class="hover:text-cyber-green px-3 py-2 rounded-md text-sm font-medium transition-colors">Timeline</a>
                         <a href="#simulation" class="hover:text-cyber-purple px-3 py-2 rounded-md text-sm font-medium transition-colors">Simulations</a>
+                        <a href="#advanced" class="hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Algorithms</a>
                         <a href="#what-if" class="hover:text-red-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">What If?</a>
                         <a href="#alabama" class="hover:text-cyber-blue px-3 py-2 rounded-md text-sm font-medium transition-colors">Alabama Hub</a>
                         <a href="#artifacts" class="hover:text-cyber-purple px-3 py-2 rounded-md text-sm font-medium transition-colors">Artifacts</a>
@@ -414,6 +415,100 @@
 
         </section>
 
+        <!-- Section: Advanced Algorithms & Applications (NEW) -->
+        <section id="advanced" class="pt-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-white">Algorithms & The Global Race</h2>
+                <p class="text-xl text-gray-400">The software and hardware shaping the quantum frontier.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- The Algorithms -->
+                <div class="glass-panel p-8 rounded-3xl border-t-4 border-yellow-400 relative overflow-hidden">
+                    <i class="fa-solid fa-square-root-variable absolute -right-4 -bottom-4 text-[120px] text-yellow-400/10 z-0"></i>
+                    <h3 class="text-2xl font-bold text-white mb-6 relative z-10"><i class="fa-solid fa-code text-yellow-400 mr-2"></i> The Quantum Code</h3>
+                    
+                    <div class="space-y-6 relative z-10">
+                        <div class="bg-black/60 p-5 rounded-xl border border-gray-700">
+                            <h4 class="text-lg font-bold text-yellow-400 mb-2">Shor's Algorithm (The Code Breaker)</h4>
+                            <p class="text-sm text-gray-300">Invented in 1994, this formula proves quantum computers can factor massive numbers exponentially faster than classical computers. It is the exact mathematical reason <strong>RSA Encryption</strong> will fail, causing "Q-Day."</p>
+                        </div>
+                        <div class="bg-black/60 p-5 rounded-xl border border-gray-700">
+                            <h4 class="text-lg font-bold text-yellow-400 mb-2">Grover's Algorithm (The Super Search)</h4>
+                            <p class="text-sm text-gray-300">A quantum search algorithm that acts like a massive shortcut. It allows computers to find a specific needle in an unsorted haystack (like brute-forcing a password) vastly faster than checking every option one by one.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-World Applications -->
+                <div class="glass-panel p-8 rounded-3xl border-t-4 border-cyber-green relative overflow-hidden">
+                    <i class="fa-solid fa-earth-americas absolute -right-4 -bottom-4 text-[120px] text-cyber-green/10 z-0"></i>
+                    <h3 class="text-2xl font-bold text-white mb-6 relative z-10"><i class="fa-solid fa-flask text-cyber-green mr-2"></i> Real-World Applications</h3>
+                    
+                    <div class="space-y-6 relative z-10">
+                        <div class="bg-black/60 p-5 rounded-xl border border-gray-700 border-l-4 border-l-cyber-green">
+                            <h4 class="text-lg font-bold text-white mb-2">Molecular Simulation & Drug Discovery</h4>
+                            <p class="text-sm text-gray-300">Nature operates on quantum mechanics. By using quantum computers to perfectly simulate how proteins and chemicals interact, we can discover new lifesaving drugs in days instead of decades of lab trial-and-error.</p>
+                        </div>
+                        <div class="bg-black/60 p-5 rounded-xl border border-gray-700 border-l-4 border-l-cyber-blue">
+                            <h4 class="text-lg font-bold text-white mb-2">Ultimate Optimization</h4>
+                            <p class="text-sm text-gray-300">From routing millions of global shipping logistics instantly, to optimizing complex financial stock portfolios, to training massive AI neural networks, quantum computing evaluates all possibilities simultaneously to find the absolute perfect answer.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deep Dive: The Cryptographer's Podcast (NEW) -->
+            <div class="mt-8 glass-panel p-8 rounded-3xl border-l-8 border-yellow-400 relative overflow-hidden bg-gradient-to-r from-gray-900 to-black">
+                <i class="fa-solid fa-microphone-lines absolute right-8 top-8 text-6xl text-gray-800 opacity-50"></i>
+                <div class="inline-block mb-4 px-4 py-1 rounded-full border border-yellow-500 bg-yellow-900/30 text-yellow-400 text-xs font-bold uppercase tracking-widest">
+                    Deep Dive Transcript
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-6">Explain Shor's Algorithm Like I'm Five</h3>
+                
+                <div class="space-y-4 font-sans">
+                    <div class="flex gap-4">
+                        <div class="font-bold text-cyber-blue w-24 shrink-0 text-right">Podcast Host:</div>
+                        <div class="text-gray-300 italic bg-black/40 p-3 rounded-lg border border-gray-800 w-full">"We hear about 'Q-Day' ending encryption. But what is Shor's algorithm actually doing under the hood?"</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="font-bold text-yellow-400 w-24 shrink-0 text-right">Cyber Expert:</div>
+                        <div class="text-gray-300 bg-gray-900 p-4 rounded-lg border border-gray-700 w-full leading-relaxed shadow-inner">
+                            <p class="mb-3">"Imagine I give you the number 15 and ask, <em>'What two prime numbers multiply to make this?'</em> You instantly say 3 and 5. But what if I give you a number with 600 digits? Classical computers have to guess every combination one by one. It would take millions of years."</p>
+                            <p>"Shor's Algorithm doesn't guess. It uses quantum waves. It creates a massive mathematical wave where the wrong answers interfere and cancel each other out—<strong>exactly like how noise-canceling headphones block out airplane engine noise</strong>. Meanwhile, the correct answers amplify and get louder. It finds the answer in hours, and when it does, the mathematical lock protecting your bank account and military secrets just clicks open."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Industry Race -->
+            <div class="mt-8 glass-panel p-8 rounded-3xl border border-gray-700">
+                <h3 class="text-2xl font-bold text-white mb-6 text-center">The Quantum Arms Race: Who's Building It?</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="bg-gray-900/80 p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition-colors">
+                        <i class="fa-solid fa-server text-blue-500 text-3xl mb-3"></i>
+                        <h4 class="font-bold text-white">IBM Quantum</h4>
+                        <p class="text-xs text-gray-400 mt-2">Leading the charge in scaling "superconducting" qubits and building massive quantum data centers.</p>
+                    </div>
+                    <div class="bg-gray-900/80 p-6 rounded-xl border border-gray-700 hover:border-red-500 transition-colors">
+                        <i class="fa-brands fa-google text-red-500 text-3xl mb-3"></i>
+                        <h4 class="font-bold text-white">Google Sycamore</h4>
+                        <p class="text-xs text-gray-400 mt-2">Famous for achieving "Quantum Supremacy" in 2019, doing in seconds what would take supercomputers 10,000 years.</p>
+                    </div>
+                    <div class="bg-gray-900/80 p-6 rounded-xl border border-gray-700 hover:border-purple-500 transition-colors">
+                        <i class="fa-solid fa-atom text-purple-500 text-3xl mb-3"></i>
+                        <h4 class="font-bold text-white">IonQ</h4>
+                        <p class="text-xs text-gray-400 mt-2">Uses "trapped ions" suspended by lasers. Slower, but creates highly stable, accurate qubits with fewer errors.</p>
+                    </div>
+                    <div class="bg-gray-900/80 p-6 rounded-xl border border-gray-700 hover:border-blue-400 transition-colors">
+                        <i class="fa-brands fa-microsoft text-blue-400 text-3xl mb-3"></i>
+                        <h4 class="font-bold text-white">Microsoft Azure</h4>
+                        <p class="text-xs text-gray-400 mt-2">Trying to build rare "topological" qubits that are immune to errors, and pushing quantum access into cloud networks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Section: What If Scenario (NEW) -->
         <section id="what-if" class="pt-16">
             <div class="glass-panel rounded-3xl p-8 md:p-12 border-t-4 border-red-500 relative overflow-hidden bg-red-950/20">
@@ -441,8 +536,8 @@
                         <div class="flex flex-col justify-center">
                             <div class="glass-panel p-6 rounded-xl border-l-4 border-cyber-green bg-black/80 shadow-[0_0_20px_rgba(0,255,157,0.15)]">
                                 <h4 class="text-xl font-bold text-cyber-green mb-3"><i class="fa-solid fa-shield-virus mr-2"></i> The Countermeasure: PQC</h4>
-                                <p class="text-gray-300 text-sm mb-4">This nightmare scenario is why the cybersecurity world isn't waiting. Cryptographers have already developed <strong>Post-Quantum Cryptography (PQC)</strong>.</p>
-                                <p class="text-gray-400 text-sm">PQC uses entirely new types of mathematics—like complex, multidimensional lattice grids—that even quantum computers get completely lost trying to solve. The global race right now is to upgrade our current systems to PQC <em>before</em> Q-Day actually arrives.</p>
+                                <p class="text-gray-300 text-sm mb-4">This nightmare scenario is why the cybersecurity world isn't waiting. In August 2024, NIST finalized the world's first <strong>Post-Quantum Cryptography (PQC) standards</strong>.</p>
+                                <p class="text-gray-400 text-sm">PQC uses entirely new types of mathematics—like complex, multidimensional lattice grids—that even quantum algorithms like Shor's get completely lost trying to solve. The global race right now is to upgrade our current systems to PQC <em>before</em> Q-Day actually arrives.</p>
                             </div>
                         </div>
                     </div>
@@ -491,7 +586,21 @@
                         </div>
                     </div>
 
-                    <!-- NEW: Local Careers -->
+                    <!-- NEW: The Student Perspective Callout -->
+                    <div class="bg-gradient-to-r from-cyber-blue/10 to-cyber-purple/10 border border-cyber-blue p-6 rounded-2xl mb-12 shadow-[0_0_20px_rgba(0,240,255,0.1)]">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-cyber-blue text-black w-12 h-12 rounded-full flex items-center justify-center text-2xl shrink-0 mt-1 shadow-[0_0_10px_#00f0ff]">
+                                <i class="fa-solid fa-user-graduate"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white mb-2">Why does this matter to me in 2026?</h4>
+                                <p class="text-gray-300 text-sm leading-relaxed mb-3">If you are a high school student in Alabama going into cybersecurity today, you are sitting on a goldmine. By the time you graduate college around 2030, the world won't just be <em>talking</em> about quantum-safe networks; we will be actively fighting to defend them.</p>
+                                <p class="text-gray-300 text-sm leading-relaxed">The FBI at Redstone Arsenal and the defense contractors in Huntsville aren't looking for people who just know traditional 1990s IT. They are actively hunting for the next generation of analysts who understand AI threat hunting and Post-Quantum Cryptography (PQC). You are in the exact right place, at the exact right time, to step into a massive career defending national security.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Local Careers -->
                     <h3 class="text-2xl font-bold mb-4 text-cyber-green border-b border-gray-700 pb-2"><i class="fa-solid fa-user-tie mr-2"></i> Future Careers in Our Area</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div class="bg-gray-900/80 p-4 rounded-lg border border-gray-700 border-l-4 border-l-cyber-purple">
@@ -520,46 +629,40 @@
             <h2 class="text-3xl font-bold mb-8 flex items-center gap-3 text-white"><i class="fa-solid fa-folder-open text-cyber-purple"></i> Project Artifacts</h2>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <!-- Notebook LM Iframe -->
-                <div class="glass-panel p-6 rounded-2xl neon-border-blue flex flex-col">
-                    <h3 class="text-xl font-bold mb-4 flex justify-between items-center text-white">
-                        <span><i class="fa-solid fa-book text-cyber-blue mr-2"></i> NotebookLM Interactive Space</span>
-                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">Live Embedding</span>
-                    </h3>
-                    <p class="text-sm text-gray-400 mb-4">Explore the synthesized notes, AI chat, and connected sources for this project below.</p>
-                    
-                    <div class="relative w-full h-[400px] bg-white rounded-xl border border-gray-700 overflow-hidden group mb-4">
-                        <!-- Injected User's NotebookLM Link -->
-                        <iframe id="notebook-iframe" src="https://notebooklm.google.com/notebook/895e0d24-7f10-4fbe-9b93-cfa1bcb727dd?artifactId=5c0e94d7-2b20-4f86-bf3d-6469fdef6454" class="w-full h-full border-0 absolute z-0" allow="clipboard-write"></iframe>
+                <!-- REBUILT: Notebook LM Launch Portal -->
+                <div class="glass-panel p-6 rounded-2xl neon-border-blue flex flex-col justify-between relative overflow-hidden">
+                    <!-- Decorative Background element -->
+                    <div class="absolute -right-10 -bottom-10 opacity-10 text-[150px] text-cyber-blue">
+                        <i class="fa-solid fa-brain"></i>
                     </div>
 
-                    <!-- Fallback button in case school networks block iframes -->
-                    <div class="text-center mt-auto">
-                        <a href="https://notebooklm.google.com/notebook/895e0d24-7f10-4fbe-9b93-cfa1bcb727dd?artifactId=5c0e94d7-2b20-4f86-bf3d-6469fdef6454" target="_blank" class="inline-block bg-cyber-blue/20 hover:bg-cyber-blue text-cyber-blue hover:text-cyber-dark font-bold py-2 px-6 rounded-full border border-cyber-blue transition-all duration-300 text-sm">
-                            <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Open Notebook in Full Screen
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 flex justify-between items-center text-white relative z-10">
+                            <span><i class="fa-solid fa-book text-cyber-blue mr-2"></i> NotebookLM Workspace</span>
+                            <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded border border-blue-500/30 animate-pulse">Protected Link</span>
+                        </h3>
+                        <p class="text-sm text-gray-400 mb-6 relative z-10">Google secures NotebookLM environments to protect AI data. Click below to launch the synthesized notes, AI chat, and connected sources in a secure window.</p>
+                        
+                        <div class="bg-black/50 p-4 rounded-xl border border-gray-700 mb-6 relative z-10">
+                            <h4 class="text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">Workspace Contents:</h4>
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li><i class="fa-solid fa-check text-cyber-green mr-2"></i> Source Documents & Transcripts</li>
+                                <li><i class="fa-solid fa-check text-cyber-green mr-2"></i> AI Synthesis Chatbot</li>
+                                <li><i class="fa-solid fa-check text-cyber-green mr-2"></i> Interactive Study Guides</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Launch Button -->
+                    <div class="text-center mt-auto relative z-10">
+                        <a href="https://notebooklm.google.com/notebook/895e0d24-7f10-4fbe-9b93-cfa1bcb727dd?artifactId=5c0e94d7-2b20-4f86-bf3d-6469fdef6454" target="_blank" class="inline-block w-full bg-cyber-blue/20 hover:bg-cyber-blue text-cyber-blue hover:text-cyber-dark font-bold py-4 px-6 rounded-xl border border-cyber-blue transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.3)] hover:shadow-[0_0_25px_rgba(0,240,255,0.6)]">
+                            <i class="fa-solid fa-rocket mr-2"></i> Launch Secure Workspace
                         </a>
                     </div>
                 </div>
 
-                <!-- Podcast & Resources -->
+                <!-- Resources -->
                 <div class="flex flex-col gap-6">
-                    <!-- Podcast Embed -->
-                    <div class="glass-panel p-6 rounded-2xl border border-cyber-green shadow-[0_0_15px_rgba(0,255,157,0.1)]">
-                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">
-                            <i class="fa-solid fa-headphones text-cyber-green"></i> Project Deep Dive Podcast
-                        </h3>
-                        
-                        <div class="w-full bg-black/60 rounded-xl border border-gray-700 flex flex-col p-5">
-                            <p class="text-sm text-gray-300 mb-4">Listen to this AI-generated synthesis explaining Superposition, the threat of "Harvest Now, Decrypt Later," and why Huntsville is the epicenter of it all.</p>
-                            
-                            <!-- Custom Audio Player linking to your uploaded file -->
-                            <audio controls class="w-full rounded-md shadow-lg outline-none">
-                                <source src="Why_Hackers_Are_Harvesting_Encrypted_Data.m4a" type="audio/mp4">
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
-                    </div>
-
                     <!-- Working Links -->
                     <div class="glass-panel p-6 rounded-2xl border border-gray-700 flex-grow">
                         <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white"><i class="fa-solid fa-link text-cyber-purple"></i> Deep Dive Resources</h3>
