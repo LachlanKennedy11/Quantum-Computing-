@@ -431,11 +431,26 @@
                     <div class="space-y-6 relative z-10">
                         <div class="bg-black/60 p-5 rounded-xl border border-gray-700">
                             <h4 class="text-lg font-bold text-yellow-400 mb-2">Shor's Algorithm (The Code Breaker)</h4>
-                            <p class="text-sm text-gray-300">Invented in 1994, this formula proves quantum computers can factor massive numbers exponentially faster than classical computers. It is the exact mathematical reason <strong>RSA Encryption</strong> will fail, causing "Q-Day."</p>
+                            <p class="text-sm text-gray-300">Invented in 1994, this formula proves quantum computers can factor massive numbers exponentially faster than classical computers. It is the exact mathematical reason 
+                                <!-- NEW: Tooltip for RSA Encryption -->
+                                <span class="relative inline-block tooltip-container cursor-help border-b border-dashed border-cyber-blue text-cyber-blue font-bold">
+                                    RSA Encryption
+                                    <span class="tooltip-text absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-gray-900 border border-cyber-blue text-white text-xs rounded-lg p-3 shadow-xl z-50">
+                                        <strong>RSA Encryption:</strong> The standard math-based security lock that protects almost everything on the internet today, including banking and passwords.
+                                    </span>
+                                </span> 
+                                will fail, causing "Q-Day."</p>
                         </div>
                         <div class="bg-black/60 p-5 rounded-xl border border-gray-700">
                             <h4 class="text-lg font-bold text-yellow-400 mb-2">Grover's Algorithm (The Super Search)</h4>
-                            <p class="text-sm text-gray-300">A quantum search algorithm that acts like a massive shortcut. It allows computers to find a specific needle in an unsorted haystack (like brute-forcing a password) vastly faster than checking every option one by one.</p>
+                            <p class="text-sm text-gray-300">A quantum search algorithm that acts like a massive shortcut. It allows computers to find a specific needle in an unsorted haystack (like 
+                                <!-- NEW: Tooltip for Brute-forcing -->
+                                <span class="relative inline-block tooltip-container cursor-help border-b border-dashed border-cyber-purple text-cyber-purple font-bold">
+                                    brute-forcing a password
+                                    <span class="tooltip-text absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-gray-900 border border-cyber-purple text-white text-xs rounded-lg p-3 shadow-xl z-50">
+                                        <strong>Brute-Force Attack:</strong> When a hacker uses a computer program to guess every single possible password combination until it finds the right one.
+                                    </span>
+                                </span>) vastly faster than checking every option one by one.</p>
                         </div>
                     </div>
                 </div>
@@ -629,35 +644,36 @@
             <h2 class="text-3xl font-bold mb-8 flex items-center gap-3 text-white"><i class="fa-solid fa-folder-open text-cyber-purple"></i> Project Artifacts</h2>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <!-- REBUILT: Notebook LM Launch Portal -->
+                <!-- REBUILT: Secure Audio Briefing Portal -->
                 <div class="glass-panel p-6 rounded-2xl neon-border-blue flex flex-col justify-between relative overflow-hidden">
                     <!-- Decorative Background element -->
                     <div class="absolute -right-10 -bottom-10 opacity-10 text-[150px] text-cyber-blue">
-                        <i class="fa-solid fa-brain"></i>
+                        <i class="fa-solid fa-headphones"></i>
                     </div>
 
                     <div>
                         <h3 class="text-xl font-bold mb-4 flex justify-between items-center text-white relative z-10">
-                            <span><i class="fa-solid fa-book text-cyber-blue mr-2"></i> NotebookLM Workspace</span>
-                            <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded border border-blue-500/30 animate-pulse">Protected Link</span>
+                            <span><i class="fa-solid fa-shield-halved text-cyber-blue mr-2"></i> Secure Audio Briefing</span>
+                            <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded border border-blue-500/30 animate-pulse">Encrypted Channel</span>
                         </h3>
-                        <p class="text-sm text-gray-400 mb-6 relative z-10">Google secures NotebookLM environments to protect AI data. Click below to launch the synthesized notes, AI chat, and connected sources in a secure window.</p>
+                        <p class="text-sm text-gray-400 mb-6 relative z-10">Listen to the AI-synthesized deep dive on quantum computing, the cyber threat, and why Huntsville is the epicenter of this technological collision.</p>
                         
                         <div class="bg-black/50 p-4 rounded-xl border border-gray-700 mb-6 relative z-10">
-                            <h4 class="text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">Workspace Contents:</h4>
+                            <h4 class="text-xs font-bold text-gray-500 mb-2 uppercase tracking-wider">Briefing Contents:</h4>
                             <ul class="text-sm text-gray-300 space-y-2">
-                                <li><i class="fa-solid fa-check text-cyber-green mr-2"></i> Source Documents & Transcripts</li>
-                                <li><i class="fa-solid fa-check text-cyber-green mr-2"></i> AI Synthesis Chatbot</li>
-                                <li><i class="fa-solid fa-check text-cyber-green mr-2"></i> Interactive Study Guides</li>
+                                <li><i class="fa-solid fa-check text-cyber-green mr-2"></i> Superposition & Entanglement</li>
+                                <li><i class="fa-solid fa-check text-cyber-green mr-2"></i> "Harvest Now, Decrypt Later" Threat</li>
+                                <li><i class="fa-solid fa-check text-cyber-green mr-2"></i> The Alabama Defense Ecosystem</li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- Launch Button -->
+                    <!-- Launch Button -> Audio Player -->
                     <div class="text-center mt-auto relative z-10">
-                        <a href="https://drive.google.com/file/d/1twvCC5YURg7T5z6fSfAcj730o9BX1aTL/view?usp=sharing" target="_blank" class="inline-block w-full bg-cyber-blue/20 hover:bg-cyber-blue text-cyber-blue hover:text-cyber-dark font-bold py-4 px-6 rounded-xl border border-cyber-blue transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.3)] hover:shadow-[0_0_25px_rgba(0,240,255,0.6)]">
-                            <i class="fa-solid fa-rocket mr-2"></i> Launch Secure Workspace
-                        </a>
+                        <button id="podcast-play-btn" class="inline-block w-full bg-cyber-blue/20 hover:bg-cyber-blue text-cyber-blue hover:text-cyber-dark font-bold py-4 px-6 rounded-xl border border-cyber-blue transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.3)] hover:shadow-[0_0_25px_rgba(0,240,255,0.6)]">
+                            <i id="podcast-icon" class="fa-solid fa-play mr-2"></i> <span id="podcast-text">Launch Briefing (Play Audio)</span>
+                        </button>
+                        <audio id="podcast-audio" src="https://drive.google.com/file/d/1twvCC5YURg7T5z6fSfAcj730o9BX1aTL/view?usp=drive_link"></audio>
                     </div>
                 </div>
 
@@ -984,6 +1000,45 @@
         
         // Start typing after a short delay
         setTimeout(typeWriter, 1000);
+
+        // ==========================================
+        // NEW: PODCAST AUDIO PLAYER LOGIC
+        // ==========================================
+        const playBtn = document.getElementById('podcast-play-btn');
+        const audioEl = document.getElementById('podcast-audio');
+        const playIcon = document.getElementById('podcast-icon');
+        const playText = document.getElementById('podcast-text');
+
+        if (playBtn && audioEl) {
+            playBtn.addEventListener('click', () => {
+                if (audioEl.paused) {
+                    audioEl.play();
+                    playIcon.classList.remove('fa-play');
+                    playIcon.classList.add('fa-pause');
+                    playText.innerText = "Pause Secure Briefing";
+                    // Visually highlight the button while playing
+                    playBtn.classList.add('bg-cyber-blue', 'text-cyber-dark');
+                    playBtn.classList.remove('bg-cyber-blue/20', 'text-cyber-blue');
+                } else {
+                    audioEl.pause();
+                    playIcon.classList.remove('fa-pause');
+                    playIcon.classList.add('fa-play');
+                    playText.innerText = "Launch Briefing (Play Audio)";
+                    // Revert button visual state
+                    playBtn.classList.remove('bg-cyber-blue', 'text-cyber-dark');
+                    playBtn.classList.add('bg-cyber-blue/20', 'text-cyber-blue');
+                }
+            });
+
+            // Reset button when audio finishes automatically
+            audioEl.addEventListener('ended', () => {
+                playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play');
+                playText.innerText = "Launch Briefing (Play Audio)";
+                playBtn.classList.remove('bg-cyber-blue', 'text-cyber-dark');
+                playBtn.classList.add('bg-cyber-blue/20', 'text-cyber-blue');
+            });
+        }
 
         // Fix resizing for simulation canvases
         window.addEventListener('resize', () => {
